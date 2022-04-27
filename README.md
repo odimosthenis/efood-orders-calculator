@@ -1,2 +1,2 @@
 # efood-orders-calculator
-This simple bookmarklet creates you guilt by calculating how much money you have spent on ordering delivery from efood. 
+This simple bookmarklet creates you guilt by calculating how much money you have spent on efood delivery. 
