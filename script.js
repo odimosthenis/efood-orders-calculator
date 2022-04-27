@@ -29,5 +29,90 @@ fetch("https://api.e-food.gr/api/v1/user/orders/history?limit=1000&offset=5&mode
               sum+=order.price;
           });
           console.log(sum);
+          popup(sum)
       });
   });
+
+
+  // Create the popup 
+var style_str = `
+.popup {
+    width : 200px;
+    height : 100px;
+    border-radius : 3px;
+    box-shadow : 2px 2px 4px 4px grey;
+    position :fixed;
+    top : 10%;
+    left : 50%;
+    margin-left : -100px;
+    margin-top : -50px;
+    z-index : 100;  
+    text-align: center;
+    padding: 0px 0px;
+    background: white;
+} 
+
+.bar{
+    height: 20px;
+    border-radius : 3px 3px 0px 0px;
+    background: rgb(238, 238, 238);
+}
+
+.close{
+    width: 20px;
+    height: inherit;
+    background: rgb(247, 148, 148);
+    z-index: 10;
+    float: right;
+    border-radius : 0px 3px 0px 0px;
+}
+
+.close:hover{
+    background: red;
+}
+
+.content{
+    padding: 5px 5px;
+}   
+} 
+`
+
+function popup(sum){
+
+    if (document.querySelectorAll('.popup')>0){
+        let p = document.querySelectorAll('.popup');
+        p.forEach(e=>{
+            e.remove()
+        })
+    }
+
+    let head = document.querySelector("head");
+    let style = document.createElement("style");
+    head.appendChild(style)
+    style.innerHTML= style_str;
+    
+    let popup = document.createElement("div");
+    popup.innerHTML = `
+    <div class="bar">
+            Efood Bookmarklet
+                <div class="close">✖</div>
+    
+            </div>
+            <div class="content">
+                <b><i>Loading.. </i></b>
+            </div>
+            `
+    console.log(popup)
+    popup.classList.add("popup")
+    document.querySelector("body").appendChild(popup)
+
+    let close_btn = document.querySelector(".close");
+    close_btn.addEventListener("click", ()=>{
+        popup.remove()
+        console.log("removes: ", popup)
+    })
+    popup.querySelector(".content").innerHTML = ` Your Total Price: <br> <i> <b> ${sum.toFixed(2)} </b> </i> <br> click to close `
+
+
+
+}
