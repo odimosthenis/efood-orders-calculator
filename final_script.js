@@ -1,8 +1,8 @@
 
 // function find the sum
-function gettotal(){
-    return new Promise( res=>{
-        fetch("https://api.e-food.gr/api/v1/user/orders/history?limit=1000&offset=5&mode=extended", {
+async function gettotal(MAX){
+    return new  Promise( async res=>{
+        fetch(`https://api.e-food.gr/api/v1/user/orders/history?limit=${MAX}&offset=5&mode=extended`, {
             "headers": {
               "accept": "application/json, text/plain, */*",
               "accept-language": "el",
@@ -25,12 +25,19 @@ function gettotal(){
             "method": "GET",
             "mode": "cors",
             "credentials": "omit"
-          }).then(response=>{
-              response.json().then(obj=>{
+          }).then(async response=>{
+              response.json().then(async obj=>{
                   let sum=0;
-                  obj.data.orders.forEach(order=>{
+                  obj.data.orders.forEach(async order=>{
                       sum+=order.price;
                   });
+                  if (obj.data.hasNext){
+                      if(MAX>10000){
+                          sum('Too many orders error')
+                      }
+                      const newsum = await gettotal(MAX*2)
+                      res(newsum)
+                  }
                  res(sum);
               });
           });
@@ -39,7 +46,7 @@ function gettotal(){
 };
 
 // display
-async function createpopup(){
+async function createpopup(MAX){
     // insert the css rules
     let head = document.querySelector("head");
     let style = document.createElement("style");
@@ -60,12 +67,12 @@ async function createpopup(){
         pop.remove();
     });
 
-    let total = await gettotal();
+    let total = await gettotal(MAX);
     total = total.toFixed(2);
 
     // update popup
     pop.querySelector('.content')
-    .innerHTML = `<p>Your Total is: ${total} € `;
+    .innerHTML = `<p>You have spent <b> ${total} € </b><p>`;
 
 
 };
@@ -74,7 +81,7 @@ async function createpopup(){
 
 let popinnerhtml = `
 <div class="bar">
-    <span class="bartext">Efood Calculator</span>
+    <span class="bartext">Efood Orders Calculator</span>
     <div class="close"> <span>✖</span> </div>
 </div>
 <div class="content" style="padding:5px">
@@ -162,5 +169,5 @@ let mycss = `
     100% { transform: rotate(360deg); }
 }
 `;
-
-createpopup();
+let MAX = 1000;
+createpopup(MAX);
