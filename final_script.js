@@ -31,25 +31,25 @@ function gettotal(){
                   obj.data.orders.forEach(order=>{
                       sum+=order.price;
                   });
-                 res(sum)
+                 res(sum);
               });
           });
-    })
+    });
     
-}
+};
 
 // display
 async function createpopup(){
     // insert the css rules
     let head = document.querySelector("head");
     let style = document.createElement("style");
-    head.appendChild(style)
+    head.appendChild(style);
     style.innerHTML= mycss;
 
     // create pop
     const body = document.querySelector('body');
-    const pop = document.createElement('div')
-    pop.classList.add('popup')
+    const pop = document.createElement('div');
+    pop.classList.add('popup');
     pop.innerHTML = popinnerhtml;
     body.appendChild(pop);
 
@@ -61,20 +61,20 @@ async function createpopup(){
     });
 
     let total = await gettotal();
-    total = total.toFixed(2)
+    total = total.toFixed(2);
 
     // update popup
     pop.querySelector('.content')
-    .innerHTML = `<p>Your Total is: ${total} € `
+    .innerHTML = `<p>Your Total is: ${total} € `;
 
 
-}
+};
 
 
 
 let popinnerhtml = `
 <div class="bar">
-    <span class='bartext'>Efood Calculator</span>
+    <span class="bartext">Efood Calculator</span>
     <div class="close"> <span>✖</span> </div>
 </div>
 <div class="content" style="padding:5px">
@@ -85,7 +85,7 @@ let popinnerhtml = `
 
     </div>
 </div>
-`
+`;
 
 let mycss = `
 .popup{
@@ -161,4 +161,6 @@ let mycss = `
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-`
+`;
+
+createpopup();
