@@ -32,7 +32,48 @@ fetch("https://api.e-food.gr/api/v1/user/orders/history?limit=1000&offset=5&mode
           popup(sum)
       });
   });
+let barcss=`
+    height: 20px;
+    border-radius : 3px 3px 0px 0px;
+    background: rgb(238, 238, 238);
+`
+let popcss=`
+position:fixed;
+top:50px;
+left:40%;
+background-color:white;
+width : 200px;
+height : 100px;
+border-radius : 3px;
+box-shadow : 2px 2px 4px 4px grey;
+z-index: 10;
+`;
 
+let xcss = `
+width: 20px;
+height: inherit;
+background: rgb(247, 148, 148);
+z-index: 10;
+float: right;
+border-radius : 0px 3px 0px 0px;
+`
+function createpopup(){
+    const body = document.querySelector('body');
+
+    const pop = document.createElement('div')
+    pop.classList.add('popup')
+    pop.style = `${popcss}`
+    pop.innerHTML = `
+    <div class="bar" style='${barcss}'>
+        <span class='${xcss}'>Efood Bookmarklet</span>
+        <div class="close">✖</div>
+        <div class="content" style="padding:5px">
+            <b><i>Loading.. </i></b>
+        </div>
+    </div>
+    `;
+    body.appendChild(pop)
+}  
 
   // Create the popup 
 var style_str = `
