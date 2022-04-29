@@ -79,7 +79,7 @@ async function createpopup(MAX){
 
 
 
-let popinnerhtml = `
+var popinnerhtml = `
 <div class="bar">
     <span class="bartext">Efood Orders Calculator</span>
     <div class="close"> <span>✖</span> </div>
@@ -94,7 +94,7 @@ let popinnerhtml = `
 </div>
 `;
 
-let mycss = `
+var mycss = `
 .popup{
     background-color:white;
     width: 400px;
@@ -169,5 +169,5 @@ let mycss = `
     100% { transform: rotate(360deg); }
 }
 `;
-let MAX = 1000;
+var MAX = 1000;
 createpopup(MAX);
