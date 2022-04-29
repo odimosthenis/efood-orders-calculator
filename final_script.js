@@ -2,7 +2,7 @@
 // function find the sum
 async function gettotal(MAX){
     return new  Promise( async res=>{
-        fetch(`https://api.e-food.gr/api/v1/user/orders/history?limit=${MAX}&offset=5&mode=extended`, {
+        fetch(`https://api.e-food.gr/api/v1/user/orders/history?limit=${MAX}&offset=0&mode=extended`, {
             "headers": {
               "accept": "application/json, text/plain, */*",
               "accept-language": "el",
