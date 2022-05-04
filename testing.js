@@ -33,12 +33,7 @@ async function gettotal(MAX){
                       sum+=order.price;
                       console.log(order.price)
                   });
-                  if (obj.data.hasNext){
-                      if(MAX>10000){
-                          sum('Too many orders error')
-                      }
-                      const newsum = await gettotal(MAX*2)
-                  }
+                  
                   console.log(sum, count)
                  res(sum);
               });
@@ -46,4 +41,4 @@ async function gettotal(MAX){
     });
     
 };
-gettotal(500);
+gettotal(5);
